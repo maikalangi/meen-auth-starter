@@ -3,8 +3,12 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/user.js');
+const { route } = require('./users.js');
 
 // New (login page)
+router.get('/new', (req, res)=>{
+    res.render('sessions/new.ejs');
+});
 
 // Delete (logout route)
 router.delete('/', (req, res)=>{
