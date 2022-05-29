@@ -32,14 +32,21 @@ app.use(
 const userController = require('./controllers/users');
 app.use('/users', userController);
 const sessionsController = require('./controllers/sessions');
+const { get } = require('express/lib/response');
 app.use('/sessions', sessionsController);
 
 // Routes
 // Index
 app.get('/', (req, res)=>{
-    res.render('index.ejs', {
-        currentUser: req.session.currentUser
-    });
+    if (req.session.currentUser){
+        res.render('dashboard.ejs', {
+            currentUser: req.session.currentUser
+        });
+    } else {
+        res.render('index.ejs', {
+            currentUser: req.session.currentUser
+        });
+    }
 });
 
 // Listener
